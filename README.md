@@ -1,2 +1,2 @@
-# simple-website
-my simple website
+# Simple RPN calc
+Simple RPN calculator webpage implementation.
