@@ -45,3 +45,9 @@ var minus = (stk) => {
     return fixStk(stk);
 };
 
+this.addEventListener('keypress', event => {
+  if (event.keyCode == 13) {
+    alert('hi.')
+  }
+})
+
