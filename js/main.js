@@ -45,9 +45,37 @@ var minus = (stk) => {
     return fixStk(stk);
 };
 
+var push = (stk, val) => {
+    stk.push(val);
+    return stk;
+};
+
+var performOp(stk, op) => {
+    //Do through funcTable
+    
+    return stk;
+}
+
+var input = (val) => {
+    let isInt = parseInt(val);
+    
+    if(isNaN(isInt)) {
+        //Operator
+    } else {
+        //Int
+        push(stack, val);
+    }
+    
+    return;
+};
+
 this.addEventListener('keypress', event => {
-  if (event.keyCode == 13) {
-    alert('hi.')
-  }
+    switch(event.keyCode){
+        case 97:    //97 is keycode for 1
+            input('1');
+            break;
+        
+    }
+
 })
 
