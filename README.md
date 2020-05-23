@@ -1,2 +1,2 @@
-# Simple RPN calc
-Simple RPN calculator webpage implementation.
+# Simple RPN
+My simple rpn calculator.
