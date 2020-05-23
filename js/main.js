@@ -76,130 +76,57 @@ this.addEventListener('keypress', event => {
         case 97:    //97 is keycode for 1
             input('1');
             break;
-        
-    }
-
-});
-
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 98:    //98 is keycode for 2
             input('2');
             break;
-
-    }
-
-});
-
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 99:    //99 is keycode for 3
             input('3');
             break;
-
-    }
-
-});
-
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 100:    //100 is keycode for 4
             input('4');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 101:    //101 is keycode for 5
             input('5');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 102:    //102 is keycode for 6
             input('6');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 103:    //103 is keycode for 7
             input('7');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
+        case 103:    //103 is keycode for 7
+            input('7');
+            break;
         case 104:    //104 is keycode for 8
             input('8');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 105:    //105 is keycode for 9
             input('9');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 107:    //107 is keycode for +
             input('+');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 109:    //109 is keycode for -
             input('-');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 106:    //106 is keycode for *
             input('*');
             break;
-
-    }
-
-});
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 191:    //191 is keycode for /
             input('/');
             break;
-
-    }
-
-});
-
-//TODO: Expand on ENTER button code
-this.addEventListener('keypress', event => {
-    switch(event.keyCode){
         case 13:    //13 is keycode for ENTER
             input('');
             break;
-
     }
 
 });
+
+
+
+
+
+
+
+
 
