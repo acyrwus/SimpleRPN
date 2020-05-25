@@ -4,13 +4,10 @@ const max_stack = 16;
 
 let stack = [];
 
-const funcTable = {
-    "swap" : swap,
-    "add" : add,
-    "minus" : minus,
-    "pow" : pow,
-    "mult" : mult
-};
+//Stack Needs to be init with 0's
+(function iife() {
+    stack = new Array(max_stack).fill(0);
+})()
 
 var swap = (stk) => {
     let temp = stk[0];
@@ -45,78 +42,103 @@ var minus = (stk) => {
     return fixStk(stk);
 };
 
-var push = (stk, val) => {
-    stk.push(val);
+var push = (stk) => {
+    stk.unshift(0)
+};
+
+const funcTable = {
+    "swap" : swap,
+    "+" : add,
+    "-" : minus,
+    "^" : pow,
+    "*" : mult,
+    "enter" : push
+};
+
+var append = (stk, val) => {
+    stk[0] = stk[0] + '' + val
     return stk;
 };
 
-//I'm not sure if this is how you do arrow functions. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-var performOp(stk, op) => {
+
+var performOp = (stk, op) => {
     //Do through funcTable
-
+    stk = funcTable[op](stk);
     
     return stk;
 };
 
-var input = (val) => {
-    let isInt = parseInt(val);
+var syncStack = (stk) => {
+    //TODO(Richie): use querySelector to match the 3 the contents of stack
+    //with the dom. Go by id, they should be defined "stk-0", "stk-1".. , already.
     
+};
+
+
+//Update stack based on input
+//Sync the dom with stack
+var input = (val) => {
+    
+    let isInt = parseInt(val);
+        
     if(isNaN(isInt)) {
         //Operator
+        stack = performOp(stack, val);
     } else {
         //Int
-        push(stack, val);
+        stack = append(stack, val);
     }
-    
+    syncStack(stack);
 
 };
 
+
+
 this.addEventListener('keypress', event => {
+    
+    //Switch on KeyCode
     switch(event.keyCode){
-        case 97:    //97 is keycode for 1
+        case 49:    //97 is keycode for 1
             input('1');
             break;
-        case 98:    //98 is keycode for 2
+        case 50:    //98 is keycode for 2
             input('2');
             break;
-        case 99:    //99 is keycode for 3
+        case 51:    //99 is keycode for 3
             input('3');
             break;
-        case 100:    //100 is keycode for 4
+        case 52:    //100 is keycode for 4
             input('4');
             break;
-        case 101:    //101 is keycode for 5
+        case 53:    //101 is keycode for 5
             input('5');
             break;
-        case 102:    //102 is keycode for 6
+        case 54:    //102 is keycode for 6
             input('6');
             break;
-        case 103:    //103 is keycode for 7
+        case 55:    //103 is keycode for 7
             input('7');
             break;
-        case 103:    //103 is keycode for 7
-            input('7');
-            break;
-        case 104:    //104 is keycode for 8
+        case 56:    //104 is keycode for 8
             input('8');
             break;
-        case 105:    //105 is keycode for 9
+        case 57:    //105 is keycode for 9
             input('9');
             break;
-        case 107:    //107 is keycode for +
+        case 43:    //107 is keycode for +
             input('+');
             break;
-        case 109:    //109 is keycode for -
+        case 45:    //109 is keycode for -
             input('-');
             break;
-        case 106:    //106 is keycode for *
+        case 42:    //106 is keycode for *
             input('*');
             break;
-        case 191:    //191 is keycode for /
+        case 47:    //191 is keycode for /
             input('/');
             break;
         case 13:    //13 is keycode for ENTER
-            input('');
+            input("enter");
             break;
     }
 
