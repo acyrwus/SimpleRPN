@@ -4,10 +4,9 @@ const max_stack = 16;
 
 let stack = [];
 
-//Stack Needs to be init with 0's
-(function iife() {
-    stack = new Array(max_stack).fill(0);
-})()
+let id = (x) => document.getElementById(x);
+
+let bufferFlag = false;
 
 var swap = (stk) => {
     let temp = stk[0];
@@ -29,11 +28,13 @@ var pow = (stk) => {
 var fixStk = (stk) => {
     stk = swap(stk);
     stk.shift();
+    stk.push(0);
     return stk;
 };
 
 var add = (stk) => {
     stk[0] = stk[0] + stk[1];
+    console.log(stk[1])
     return fixStk(stk);
 };
 
@@ -43,7 +44,8 @@ var minus = (stk) => {
 };
 
 var push = (stk) => {
-    stk.unshift(0)
+    stk.unshift(0);
+    return stk;
 };
 
 const funcTable = {
@@ -56,7 +58,17 @@ const funcTable = {
 };
 
 var append = (stk, val) => {
-    stk[0] = stk[0] + '' + val
+    
+    if(bufferFlag){
+        push(stk);
+        bufferFlag = false;
+    }
+    
+    if(stk[0] == 0){
+        stk[0] = parseInt(val);
+    }else {
+        stk[0] = parseInt(stk[0] + '' + val);
+    }
     return stk;
 };
 
@@ -64,14 +76,15 @@ var append = (stk, val) => {
 var performOp = (stk, op) => {
     //Do through funcTable
     stk = funcTable[op](stk);
-    
+    bufferFlag = op == "enter" ? false : true
     return stk;
 };
 
 var syncStack = (stk) => {
-    //TODO(Richie): use querySelector to match the 3 the contents of stack
-    //with the dom. Go by id, they should be defined "stk-0", "stk-1".. , already.
-    
+    id("stk-0").value = stk[0]
+    id("stk-1").value = stk[1]
+    id("stk-2").value = stk[2]
+    id("stk-3").value = stk[3]
 };
 
 
@@ -98,6 +111,9 @@ this.addEventListener('keypress', event => {
     
     //Switch on KeyCode
     switch(event.keyCode){
+        case 48:    //97 is keycode for 1
+            input('0');
+            break;
         case 49:    //97 is keycode for 1
             input('1');
             break;
@@ -144,6 +160,11 @@ this.addEventListener('keypress', event => {
 
 });
 
+//Stack Needs to be init with 0's
+window.onload = function init() {
+    stack = new Array(max_stack).fill(0);
+    syncStack(stack);
+}
 
 
 
