@@ -43,6 +43,11 @@ var minus = (stk) => {
     return fixStk(stk);
 };
 
+var div = (stk) => {
+    stk[0] = stk[1] / stk[0];
+    return fixStk(stk);
+}
+
 var push = (stk) => {
     stk.unshift(0);
     return stk;
@@ -54,27 +59,33 @@ const funcTable = {
     "-" : minus,
     "^" : pow,
     "*" : mult,
+    "/" : div,
     "enter" : push
 };
 
+
 var append = (stk, val) => {
+    
     
     if(bufferFlag){
         push(stk);
         bufferFlag = false;
     }
     
+    
     if(stk[0] == 0){
-        stk[0] = parseInt(val);
+        stk[0] = val;
     }else {
-        stk[0] = parseInt(stk[0] + '' + val);
+        stk[0] = stk[0] + '' + val;
     }
     return stk;
 };
 
+var toInt = (stk) => stk.map((x) => parseFloat(x))
 
 var performOp = (stk, op) => {
     //Do through funcTable
+    stk = toInt(stk);
     stk = funcTable[op](stk);
     bufferFlag = op == "enter" ? false : true
     return stk;
@@ -91,14 +102,15 @@ var syncStack = (stk) => {
 //Update stack based on input
 //Sync the dom with stack
 var input = (val) => {
-    
     let isInt = parseInt(val);
         
-    if(isNaN(isInt)) {
+    if(isNaN(isInt) && val != ".") {
         //Operator
         stack = performOp(stack, val);
     } else {
         //Int
+                
+
         stack = append(stack, val);
     }
     syncStack(stack);
@@ -108,9 +120,11 @@ var input = (val) => {
 
 
 this.addEventListener('keypress', event => {
-    
     //Switch on KeyCode
     switch(event.keyCode){
+        case 46:
+            input(".");
+            break;
         case 48:    //97 is keycode for 1
             input('0');
             break;
@@ -156,6 +170,8 @@ this.addEventListener('keypress', event => {
         case 13:    //13 is keycode for ENTER
             input("enter");
             break;
+        
+        
     }
 
 });
